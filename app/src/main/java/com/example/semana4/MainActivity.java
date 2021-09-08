@@ -53,8 +53,15 @@ public class MainActivity extends AppCompatActivity {
                         reader = new BufferedReader(isr);
 
                         OutputStream os = socket.getOutputStream();
-                        OutputStreamWriter osr = new OutputStreamWriter(os);
-                        writer = new BufferedWriter(osr);
+                        OutputStreamWriter osw = new OutputStreamWriter(os);
+                        writer = new BufferedWriter(osw);
+
+                        while(true)
+                        {
+                            System.out.println("Awaiting message...");
+                            String line = reader.readLine();
+                            System.out.println("Received message: " + line);
+                        }
 
                     } catch (IOException e) {
                         // TODO Auto-generated catch block
