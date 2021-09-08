@@ -2,6 +2,7 @@ package com.example.semana4;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
@@ -36,6 +37,13 @@ public class MainActivity extends AppCompatActivity {
         ipShowcaser = findViewById(R.id.ipShow);
 
         initClient();
+
+        searchButton.setOnClickListener(
+                (view) ->
+                {
+                    moveToHostScreen();
+                }
+        );
     }
 
     public void initClient()
@@ -69,5 +77,11 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
         ).start();
+    }
+
+    public void moveToHostScreen()
+    {
+        Intent switchActivity = new Intent(this, HostSearchScreen.class);
+        startActivity(switchActivity);
     }
 }
