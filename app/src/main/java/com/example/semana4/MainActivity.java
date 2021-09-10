@@ -31,9 +31,10 @@ public class MainActivity extends AppCompatActivity {
     TextView ipShowcaser;
     EditText ip1, ip2, ip3, ip4;
 
-    String ipAddress, ip1TEXT, ip2TEXT, ip3TEXT, ip4TEXT;
+    String ipAddress;
+    int ip1TEXT, ip2TEXT, ip3TEXT, ip4TEXT;
 
-    InetAddress ipCommon;
+    InetAddress ipCommon, ipDestination;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,13 +61,16 @@ public class MainActivity extends AppCompatActivity {
         pingButton.setOnClickListener(
                 (view) ->
                 {
-                    ip1TEXT = ip1.getText().toString();
-                    ip2TEXT = ip2.getText().toString();
-                    ip3TEXT = ip3.getText().toString();
-                    ip4TEXT = ip4.getText().toString();
+                    ip1TEXT = Integer.parseInt(ip1.getText().toString());
+                    ip2TEXT = Integer.parseInt(ip2.getText().toString());
+                    ip3TEXT = Integer.parseInt(ip3.getText().toString());
+                    ip4TEXT = Integer.parseInt(ip4.getText().toString());
 
                     ipAddress = ip1TEXT + "." + ip2TEXT + "." + ip3TEXT + "." + ip4TEXT;
-                    Log.d("ip", ipAddress);
+
+                    ping(ipAddress);
+
+                    Log.d("ip", String.valueOf(ipAddress));
                 }
         );
     }
@@ -78,7 +82,12 @@ public class MainActivity extends AppCompatActivity {
                 {
                     try {
                         ipCommon = InetAddress.getLocalHost();
-                        ipShowcaser.setText(ipCommon.toString());
+                        runOnUiThread(
+                                ()->
+                                {
+                                    ipShowcaser.setText(ipCommon.toString());
+                                }
+                        );
                         socket = new Socket("192.168.1.9", 4000);
 
                         InputStream is = socket.getInputStream();
@@ -88,13 +97,6 @@ public class MainActivity extends AppCompatActivity {
                         OutputStream os = socket.getOutputStream();
                         OutputStreamWriter osw = new OutputStreamWriter(os);
                         writer = new BufferedWriter(osw);
-
-                        while(true)
-                        {
-                            System.out.println("Awaiting message...");
-                            String line = reader.readLine();
-                            System.out.println("Received message: " + line);
-                        }
 
                     } catch (IOException e) {
                         // TODO Auto-generated catch block
@@ -110,8 +112,10 @@ public class MainActivity extends AppCompatActivity {
         startActivity(switchActivity);
     }
 
-    public void ping()
+    public void ping(String ipDestination)
     {
-
+        Intent i = new Intent(this, HostSearchScreen.class);
+        i.putExtra("ipDestination", ipDestination);
+        startActivity(i);
     }
 }
