@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -20,13 +22,17 @@ import java.net.UnknownHostException;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button searchButton;
+    Button searchButton, pingButton;
     Socket socket;
 
     BufferedReader reader;
     BufferedWriter writer;
 
     TextView ipShowcaser;
+    EditText ip1, ip2, ip3, ip4;
+
+    String ipAddress, ip1TEXT, ip2TEXT, ip3TEXT, ip4TEXT;
+
     InetAddress ipCommon;
 
     @Override
@@ -34,7 +40,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         searchButton = findViewById(R.id.searchBtn);
+        pingButton = findViewById(R.id.pingBtn);
         ipShowcaser = findViewById(R.id.ipShow);
+
+        ip1 = findViewById(R.id.IPet1);
+        ip2 = findViewById(R.id.IPet2);
+        ip3 = findViewById(R.id.IPet3);
+        ip4 = findViewById(R.id.IPet4);
 
         initClient();
 
@@ -42,6 +54,19 @@ public class MainActivity extends AppCompatActivity {
                 (view) ->
                 {
                     moveToHostScreen();
+                }
+        );
+
+        pingButton.setOnClickListener(
+                (view) ->
+                {
+                    ip1TEXT = ip1.getText().toString();
+                    ip2TEXT = ip2.getText().toString();
+                    ip3TEXT = ip3.getText().toString();
+                    ip4TEXT = ip4.getText().toString();
+
+                    ipAddress = ip1TEXT + "." + ip2TEXT + "." + ip3TEXT + "." + ip4TEXT;
+                    Log.d("ip", ipAddress);
                 }
         );
     }
@@ -83,5 +108,10 @@ public class MainActivity extends AppCompatActivity {
     {
         Intent switchActivity = new Intent(this, HostSearchScreen.class);
         startActivity(switchActivity);
+    }
+
+    public void ping()
+    {
+
     }
 }
