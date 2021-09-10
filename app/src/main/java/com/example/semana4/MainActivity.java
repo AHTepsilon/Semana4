@@ -8,6 +8,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -67,6 +68,23 @@ public class MainActivity extends AppCompatActivity {
                     ip4TEXT = Integer.parseInt(ip4.getText().toString());
 
                     ipAddress = ip1TEXT + "." + ip2TEXT + "." + ip3TEXT + "." + ip4TEXT;
+
+                    if(ip1TEXT < 0 || ip1TEXT > 255)
+                    {
+                        Toast.makeText(this, "Inserte números entre 0 y 255", Toast.LENGTH_SHORT);
+                    }
+                    if(ip2TEXT < 0 || ip2TEXT > 255)
+                    {
+                        Toast.makeText(this, "Inserte números entre 0 y 255", Toast.LENGTH_SHORT);
+                    }
+                    if(ip3TEXT < 0 || ip3TEXT > 255)
+                    {
+                        Toast.makeText(this, "Inserte números entre 0 y 255", Toast.LENGTH_SHORT);
+                    }
+                    if(ip4TEXT < 0 || ip4TEXT > 255)
+                    {
+                        Toast.makeText(this, "Inserte números entre 0 y 255", Toast.LENGTH_SHORT);
+                    }
 
                     ping(ipAddress);
 
