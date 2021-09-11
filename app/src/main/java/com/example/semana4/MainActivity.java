@@ -113,16 +113,6 @@ public class MainActivity extends AppCompatActivity {
                                     ipShowcaser.setText(ipCommon.toString());
                                 }
                         );
-                        socket = new Socket("192.168.1.9", 4000);
-
-                        InputStream is = socket.getInputStream();
-                        InputStreamReader isr = new InputStreamReader(is);
-                        reader = new BufferedReader(isr);
-
-                        OutputStream os = socket.getOutputStream();
-                        OutputStreamWriter osw = new OutputStreamWriter(os);
-                        writer = new BufferedWriter(osw);
-
                     } catch (IOException e) {
                         // TODO Auto-generated catch block
                         e.printStackTrace();
