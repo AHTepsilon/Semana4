@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     String ipAddress;
     int ip1TEXT, ip2TEXT, ip3TEXT, ip4TEXT;
 
+    boolean isPinging;
+
     InetAddress ipCommon, ipDestination;
 
     @Override
@@ -55,6 +57,8 @@ public class MainActivity extends AppCompatActivity {
         searchButton.setOnClickListener(
                 (view) ->
                 {
+                    isPinging = false;
+
                     ip4TEXT = 0;
                     moveToHostScreen();
                 }
@@ -63,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
         pingButton.setOnClickListener(
                 (view) ->
                 {
+                    isPinging = true;
+
                     ip1TEXT = Integer.parseInt(ip1.getText().toString());
                     ip2TEXT = Integer.parseInt(ip2.getText().toString());
                     ip3TEXT = Integer.parseInt(ip3.getText().toString());
@@ -128,7 +134,11 @@ public class MainActivity extends AppCompatActivity {
     public void moveToHostScreen()
     {
         Intent switchActivity = new Intent(this, HostSearchScreen.class);
-        switchActivity.putExtra("hostSearcher", ip4TEXT);
+        switchActivity.putExtra("hostSearcher1", ip1.getText().toString());
+        switchActivity.putExtra("hostSearcher2", ip2.getText().toString());
+        switchActivity.putExtra("hostSearcher3", ip3.getText().toString());
+        switchActivity.putExtra("hostSearcher4", ip4.getText().toString());
+        switchActivity.putExtra("pingBool", isPinging);
         startActivity(switchActivity);
     }
 
@@ -136,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
     {
         Intent i = new Intent(this, HostSearchScreen.class);
         i.putExtra("ipDestination", ipDestination);
+        i.putExtra("pingBool", isPinging);
         startActivity(i);
     }
 }
