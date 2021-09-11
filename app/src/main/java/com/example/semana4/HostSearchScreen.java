@@ -23,7 +23,7 @@ public class HostSearchScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_host_search_screen);
 
-        hostSearchText = "\n";
+        hostSearchText = "";
 
         returnBtn = findViewById(R.id.returnButton);
         showcaser = findViewById(R.id.ipHostsField);
@@ -44,7 +44,7 @@ public class HostSearchScreen extends AppCompatActivity {
                       try {
                           InetAddress ipSearch = InetAddress.getByName(ipDestination);
 
-                          if(ipSearch.isReachable(1000))
+                          if(ipSearch.isReachable(500))
                           {
                               hostSearchText += "PING recibido\n";
                           }

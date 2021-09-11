@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         searchButton.setOnClickListener(
                 (view) ->
                 {
+                    ip4TEXT = 0;
                     moveToHostScreen();
                 }
         );
@@ -127,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
     public void moveToHostScreen()
     {
         Intent switchActivity = new Intent(this, HostSearchScreen.class);
+        switchActivity.putExtra("hostSearcher", ip4TEXT);
         startActivity(switchActivity);
     }
 
