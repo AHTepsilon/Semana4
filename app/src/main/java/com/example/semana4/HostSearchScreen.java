@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import java.io.IOException;
 import java.net.InetAddress;
@@ -14,7 +15,7 @@ import java.net.UnknownHostException;
 public class HostSearchScreen extends AppCompatActivity {
 
     Button returnBtn;
-    EditText showcaser;
+    TextView showcaser;
     String ipDestination, hostSearchText;
 
     @Override
